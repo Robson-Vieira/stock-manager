@@ -1,5 +1,7 @@
 package com.StockManager.Model;
 
-public record HandlingType() {
-
+public enum HandlingType {
+	
+	INPUT, OUTPUT;
+	
 }
