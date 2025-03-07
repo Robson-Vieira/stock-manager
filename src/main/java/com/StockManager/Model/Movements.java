@@ -13,9 +13,12 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 @Entity
-@Table(name ="Movimentações")
+@Table(name = "Movimentações")
 public class Movements implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -23,21 +26,23 @@ public class Movements implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "Produto",nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "produto_id")
 	private Product product;
-	@Column(name = "Movimentação")
+	@Column(name = "movimentação")
 	@Enumerated(EnumType.STRING)
 	private HandlingType type;
-	@Column(name ="Quantidade",nullable = false)
+	@Column(name = "quantidade", nullable = false)
 	private int amount;
 	@CreationTimestamp
-	@Column(name = "Criação")
+	@Column(name = "criação")
 	private Date moveDate;
 
-	public Movements() {}
+	public Movements() {
+	}
 
 	public Movements(Long id, Product product, HandlingType type, int amount, Date moveDate) {
-		
+
 		this.id = id;
 		this.product = product;
 		this.type = type;
