@@ -26,14 +26,18 @@ public class Movements implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@ManyToOne
 	@JoinColumn(name = "produto_id")
 	private Product product;
+	
 	@Column(name = "movimentação")
 	@Enumerated(EnumType.STRING)
 	private HandlingType type;
+	
 	@Column(name = "quantidade", nullable = false)
 	private int amount;
+	
 	@CreationTimestamp
 	@Column(name = "criação")
 	private Date moveDate;

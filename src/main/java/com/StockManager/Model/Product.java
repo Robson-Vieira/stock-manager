@@ -21,14 +21,19 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(nullable = false, unique = true, name = "nome")
 	private String name;
+	
 	@Column(nullable = false, name = "descrição")
 	private String description;
+	
 	@Column(nullable = false, name = "quantidade")
 	private int amount;
+	
 	@Column(nullable = false, name = "patrimonio")
 	private Long heritage;
+	
 	@Column(nullable = false)
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
 	private List<Movements> movements;
