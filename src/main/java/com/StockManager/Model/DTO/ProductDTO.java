@@ -1,47 +1,21 @@
-package com.StockManager.Model;
+package com.StockManager.Model.DTO;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "Produtos")
-public class Product implements Serializable {
-
+public class ProductDTO implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(nullable = false, unique = true, name = "nome")
 	private String name;
-	
-	@Column(nullable = false, name = "descrição")
 	private String description;
-	
-	@Column(nullable = false, name = "quantidade")
 	private int amount;
-	
-	@Column(nullable = false, name = "patrimonio")
 	private Long heritage;
 	
-	@Column(nullable = false)
-	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-	private List<Movements> movements;
-
-	public Product() {
+	public ProductDTO() {
 	}
 
-	public Product(Long id, String name, String description, int amount, Long heritage) {
+	ProductDTO(Long id, String name, String description, int amount, Long heritage) {
 
 		this.id = id;
 		this.name = name;
@@ -103,10 +77,12 @@ public class Product implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Product other = (Product) obj;
+		ProductDTO other = (ProductDTO) obj;
 		return amount == other.amount && Objects.equals(description, other.description)
 				&& Objects.equals(heritage, other.heritage) && Objects.equals(id, other.id)
 				&& Objects.equals(name, other.name);
 	}
+
+	
 
 }

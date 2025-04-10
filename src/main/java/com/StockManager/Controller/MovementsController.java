@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.StockManager.Model.Movements;
+import com.StockManager.Model.DTO.MovementDTO;
 import com.StockManager.Services.MovementsService;
 
 
@@ -26,23 +26,23 @@ public class MovementsController {
 	private MovementsService mService;
 	
 	@GetMapping()
-	public List<Movements> findAllMoviments() {
+	public List<MovementDTO> findAllMoviments() {
 		return mService.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<Movements> findMovement(@RequestParam Long id) {
+	public Optional<MovementDTO> findMovement(@RequestParam Long id) {
 		return mService.findById(id);
 	}
 	
 	@PostMapping()
-	public Movements createMovement(@RequestBody Movements dto) {
+	public MovementDTO createMovement(@RequestBody MovementDTO dto) {
 		return mService.create(dto);
 	}
 	
 	
 	@PutMapping()
-	public Movements putMovement(Movements dto) {
+	public MovementDTO putMovement(MovementDTO dto) {
 		return mService.update(dto);
 	}
 	

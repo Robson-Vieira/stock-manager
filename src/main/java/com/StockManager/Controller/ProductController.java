@@ -1,14 +1,20 @@
 package com.StockManager.Controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.StockManager.Model.DTO.ProductDTO;
+import com.StockManager.Services.ProductService;
 
 
 
@@ -16,29 +22,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/product")
 public class ProductController {
 
-	@GetMapping("path")
-	public String getMethodName(@RequestParam String param) {
-		return new String();
+	@Autowired
+	private ProductService pService;
+	
+	@GetMapping("/{id}")
+	public ProductDTO findProduct(@RequestParam Long id) {
+		return pService.findById(id);
 	}
 	
-	@GetMapping("path")
-	public String getMethodName(@RequestParam String param) {
-		return new String();
+	@GetMapping()
+	public List<ProductDTO> findAll() {
+		return pService.findAll();
 	}
 	
-	@PostMapping("path")
-	public String postMethodName(@RequestBody String entity) {
-		//TODO: process POST request
+	@PostMapping()
+	public ProductDTO createProduct(@RequestBody ProductDTO dto) {
 		
-		return entity;
+		return pService.create(dto);
 	}
 	
-	@PutMapping("path/{id}")
-	public String putMethodName(@PathVariable String id, @RequestBody String entity) {
-		//TODO: process PUT request
+	@PutMapping()
+	public ProductDTO updateProduct(@RequestBody ProductDTO dto) {
 		
-		return entity;
+		return pService.update(dto);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/{id}")
+	public void delete( @PathVariable Long id) {
+		pService.delete(id);
+	}
 }

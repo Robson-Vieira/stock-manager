@@ -42,7 +42,7 @@ public class Movements implements Serializable {
 	@Column(name = "criação")
 	private Date moveDate;
 
-	public Movements() {
+	public Movements(Long id2, Product product2, String string, int i, Date date) {
 	}
 
 	public Movements(Long id, Product product, HandlingType type, int amount, Date moveDate) {
