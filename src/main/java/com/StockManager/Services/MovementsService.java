@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.StockManager.Config.ModelMapperConfig;
 import com.StockManager.Exceptions.MovementNotFound;
 import com.StockManager.Model.Movements;
 import com.StockManager.Model.DTO.MovementDTO;
 import com.StockManager.Repositories.MovementsRepository;
-
+@Service
 public class MovementsService {
 
 	@Autowired

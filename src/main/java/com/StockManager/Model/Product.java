@@ -34,9 +34,7 @@ public class Product implements Serializable {
 	@Column(nullable = false, name = "patrimonio")
 	private Long heritage;
 	
-	@Column(nullable = false)
-	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-	private List<Movements> movements;
+	
 
 	public Product() {
 	}

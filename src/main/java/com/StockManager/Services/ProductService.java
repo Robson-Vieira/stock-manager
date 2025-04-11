@@ -3,13 +3,14 @@ package com.StockManager.Services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.StockManager.Config.ModelMapperConfig;
 import com.StockManager.Exceptions.ProdutNotFoudException;
 import com.StockManager.Model.Product;
 import com.StockManager.Model.DTO.ProductDTO;
 import com.StockManager.Repositories.ProductRepository;
-
+@Service
 public class ProductService {
 
 	@Autowired
