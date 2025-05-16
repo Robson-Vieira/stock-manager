@@ -7,14 +7,14 @@
 
 ## 🔄 Funcionalidades  
 
-### **1. CRUD de Produtos** (`/product`)  
+### **1. CRUD de Produtos** (`/productId`)  
 | Método HTTP | Endpoint             | Descrição                          |  
 |-------------|----------------------|------------------------------------|  
-| `GET`       | `/product/{id}`      | Busca um produto por ID.           |  
-| `GET`       | `/product`           | Lista **todos** os produtos.       |  
-| `POST`      | `/product`           | Cria um novo produto.              |  
-| `PUT`       | `/product`           | Atualiza um produto existente.     |  
-| `DELETE`    | `/product/{id}`      | Remove um produto por ID.          |  
+| `GET`       | `/productId/{id}`      | Busca um produto por ID.           |  
+| `GET`       | `/productId`           | Lista **todos** os produtos.       |  
+| `POST`      | `/productId`           | Cria um novo produto.              |  
+| `PUT`       | `/productId`           | Atualiza um produto existente.     |  
+| `DELETE`    | `/productId/{id}`      | Remove um produto por ID.          |  
 
 ### **2. CRUD de Movimentações** (`/moviments`)  
 | Método HTTP | Endpoint               | Descrição                          |  

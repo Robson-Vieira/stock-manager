@@ -37,10 +37,10 @@ public class MovementServiceTest {
 		
 		when(repository.findById(id)).thenReturn(Optional.of(moviment));
 		
-		Optional<MovementDTO> result = service.findById(id);
+		MovementDTO result = service.findById(id).orElseThrow();
 		assertNotNull(result);
-		assertEquals(id, result.get().getId());
-		assertEquals("Celular", result.get().getProduct().getName());
+		assertEquals(id, result.getId());
+		assertEquals("Celular", result.getProductId());
 	}
 	
 	

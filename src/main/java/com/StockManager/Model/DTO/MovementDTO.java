@@ -5,44 +5,44 @@ import java.util.Date;
 import java.util.Objects;
 
 import com.StockManager.Model.HandlingType;
-import com.StockManager.Model.Product;
+
 
 public class MovementDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
-	private Product product;
+	private Long productId;
 	private HandlingType type;
 	private int amount;
 	private Date moveDate;
 
-	public MovementDTO(Long id, Product product, HandlingType type, int amount, Date moveDate) {
+		public MovementDTO(Long id, Long productId, HandlingType type, int amount, Date moveDate) {
 		super();
 		this.id = id;
-		this.product = product;
+		this.productId = productId;
 		this.type = type;
 		this.amount = amount;
 		this.moveDate = moveDate;
 	}
 
 	public MovementDTO() {
-		super();
+
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Long id){
 		this.id = id;
 	}
 
-	public Product getProduct() {
-		return product;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
 	public HandlingType getType() {
@@ -71,7 +71,7 @@ public class MovementDTO implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(amount, id, moveDate, product, type);
+		return Objects.hash(amount, id, moveDate, productId, type);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class MovementDTO implements Serializable {
 			return false;
 		MovementDTO other = (MovementDTO) obj;
 		return amount == other.amount && Objects.equals(id, other.id) && Objects.equals(moveDate, other.moveDate)
-				&& Objects.equals(product, other.product) && type == other.type;
+				&& Objects.equals(productId, other.productId) && type == other.type;
 	}
 
 }

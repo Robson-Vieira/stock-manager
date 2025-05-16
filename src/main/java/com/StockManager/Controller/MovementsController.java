@@ -41,10 +41,10 @@ public class MovementsController {
 	}
 	
 	
-	@PutMapping()
+	/*@PutMapping()
 	public MovementDTO putMovement(MovementDTO dto) {
 		return mService.update(dto);
-	}
+	}*/
 	
 	@DeleteMapping("/{id}")
 	public void deleteMovement(@RequestParam Long id){
