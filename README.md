@@ -131,11 +131,6 @@ A atualização de movimentações foi temporariamente desabilitada devido à co
   - Tratar concorrência e transações atômicas
 - **Integridade histórica:** Movimentações geralmente são registros imutáveis por natureza contábil
 
-**Alternativas sugeridas:**
-- Criar nova movimentação de ajuste
-- Manter como registro histórico e criar mecanismo de "estorno"
-- Implementar sistema de "sessões" ou "lotes" que podem ser editados antes de fechamento
-
 ---
 
 ## ▶️ Como Executar
