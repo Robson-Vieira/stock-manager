@@ -1,4 +1,3 @@
--- Tabela de Produtos
 CREATE TABLE products (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -8,11 +7,11 @@ CREATE TABLE products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de Movimentações
+
 CREATE TABLE movements (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     product_id BIGINT NOT NULL,
-    type VARCHAR(10) NOT NULL, -- INPUT ou OUTPUT
+    type VARCHAR(10) NOT NULL,
     amount INT NOT NULL,
     move_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 

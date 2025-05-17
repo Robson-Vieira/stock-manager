@@ -14,7 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Produtos")
+@Table(name = "products")
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,16 +22,16 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false, unique = true, name = "nome")
+	@Column(nullable = false, unique = true, name = "name")
 	private String name;
 	
-	@Column(nullable = false, name = "descrição")
+	@Column(nullable = false, name = "description")
 	private String description;
 	
-	@Column(nullable = false, name = "quantidade")
+	@Column(nullable = false, name = "amount")
 	private int amount;
 	
-	@Column(nullable = false, name = "patrimonio")
+	@Column(nullable = false, name = "heritage")
 	private Long heritage;
 	
 	

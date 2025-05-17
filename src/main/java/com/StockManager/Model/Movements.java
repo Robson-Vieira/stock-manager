@@ -18,7 +18,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Movimentações")
+@Table(name = "movements")
 public class Movements implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,28 +27,28 @@ public class Movements implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "produto_id")
-	private Product product;
+
+	@Column(name = "product_id")
+	private Long productId;
 	
-	@Column(name = "movimentação")
+	@Column(name = "type")
 	@Enumerated(EnumType.STRING)
 	private HandlingType type;
 	
-	@Column(name = "quantidade", nullable = false)
+	@Column(name = "amount", nullable = false)
 	private int amount;
 	
 	@CreationTimestamp
-	@Column(name = "criação")
+	@Column(name = "moveDate")
 	private Date moveDate;
 
-	public Movements(Long id2, Product product2, String string, int i, Date date) {
+	public Movements() {
 	}
 
-	public Movements(Long id, Product product, HandlingType type, int amount, Date moveDate) {
+	public Movements(Long id, Long productId, HandlingType type, int amount, Date moveDate) {
 
 		this.id = id;
-		this.product = product;
+		this.productId = productId;
 		this.type = type;
 		this.amount = amount;
 		this.moveDate = moveDate;
@@ -62,12 +62,12 @@ public class Movements implements Serializable {
 		this.id = id;
 	}
 
-	public Product getProduct() {
-		return product;
+	public Long getProduct() {
+		return productId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProduct(Long product) {
+		this.productId = product;
 	}
 
 	public HandlingType getType() {
@@ -96,7 +96,7 @@ public class Movements implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(amount, id, moveDate, product, type);
+		return Objects.hash(amount, id, moveDate, productId, type);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class Movements implements Serializable {
 			return false;
 		Movements other = (Movements) obj;
 		return amount == other.amount && Objects.equals(id, other.id) && Objects.equals(moveDate, other.moveDate)
-				&& Objects.equals(product, other.product) && type == other.type;
+				&& Objects.equals(productId, other.productId) && type == other.type;
 	}
 
 }

@@ -1,43 +1,148 @@
-# 📦 StockManager API  
+📦 Stock Manager API - Documentação
+📌 Visão Geral
+API RESTful para gerenciamento de estoque com:
 
-🚧 **Status do Projeto**: Em desenvolvimento (não está pronto para produção)  
-*Esta API está em fase de construção e pode sofrer alterações significativas.*  
+CRUD completo de produtos
 
----
+CRUD de movimentações (entradas/saídas) com controle de estoque automático
 
-## 🔄 Funcionalidades  
+Validações de negócio (como estoque insuficiente)
 
-### **1. CRUD de Produtos** (`/productId`)  
-| Método HTTP | Endpoint             | Descrição                          |  
-|-------------|----------------------|------------------------------------|  
-| `GET`       | `/productId/{id}`      | Busca um produto por ID.           |  
-| `GET`       | `/productId`           | Lista **todos** os produtos.       |  
-| `POST`      | `/productId`           | Cria um novo produto.              |  
-| `PUT`       | `/productId`           | Atualiza um produto existente.     |  
-| `DELETE`    | `/productId/{id}`      | Remove um produto por ID.          |  
+🌟 Endpoints Principais
+🛍️ Produtos (/product)
+Método	Endpoint	Descrição	Status
+GET	/product	Lista todos os produtos	✅
+GET	/product/{id}	Busca produto por ID	✅
+POST	/product	Cria novo produto	✅
+PUT	/product	Atualiza produto existente	✅
+DELETE	/product/{id}	Remove produto	✅
+📦 Movimentações (/moviments)
+Método	Endpoint	Descrição	Status
+GET	/moviments	Lista todas movimentações	✅
+GET	/moviments/{id}	Busca movimentação por ID	✅
+POST	/moviments	Registra nova movimentação	✅
+DELETE	/moviments/{id}	Remove movimentação	✅
+Observação: A atualização (PUT) de movimentações está temporariamente desabilitada por decisão de design
 
-### **2. CRUD de Movimentações** (`/moviments`)  
-| Método HTTP | Endpoint               | Descrição                          |  
-|-------------|------------------------|------------------------------------|  
-| `GET`       | `/moviments`           | Lista **todas** as movimentações.  |  
-| `GET`       | `/moviments/{id}`      | Busca uma movimentação por ID.     |  
-| `POST`      | `/moviments`           | Cria uma nova movimentação.        |  
-| `PUT`       | `/moviments`           | Atualiza uma movimentação.         |  
-| `DELETE`    | `/moviments/{id}`      | Remove uma movimentação por ID.    |  
+🛠️ Como Usar
+🔄 Produtos
+Criar Produto (POST)
 
----
+json
+{
+"name": "Notebook Dell",
+"description": "Notebook i7 16GB RAM",
+"amount": 10,
+"heritage": 123456
+}
+Atualizar Produto (PUT)
 
-## ⚠️ Observações  
-- Os endpoints podem ser ajustados durante o desenvolvimento.  
-- A documentação será expandida conforme a API evolui.  
+json
+{
+"id": 1,
+"name": "Notebook Dell Updated",
+"description": "Notebook i7 32GB RAM",
+"amount": 15,
+"heritage": 123456
+}
+🔄 Movimentações
+Registrar Entrada (POST)
 
----
+json
+{
+"productId": 1,
+"type": "INPUT",
+"amount": 5
+}
+Registrar Saída (POST)
 
-## 🛠️ Tecnologias Utilizadas  
-- **Spring Boot** (Java)  
-- **Spring Web** (REST API)  
-- **Hibernate/JPA** (Persistência)  
+json
+{
+"productId": 1,
+"type": "OUTPUT",
+"amount": 3
+}
+O sistema automaticamente ajusta o estoque do produto relacionado
 
----
+⚠️ Regras de Negócio
+Estoque mínimo: Não permite saída maior que a quantidade disponível
 
-🔹 **Contribuições são bem-vindas!** Se encontrar bugs ou tiver sugestões, abra uma *issue*.
+Erro: InsufficientQuantityException (HTTP 400)
+
+Produto não encontrado:
+
+Erro: ProdutNotFoudException (HTTP 404)
+
+Movimentação não encontrada:
+
+Erro: MovementNotFound (HTTP 404)
+
+Nomes únicos: Não permite produtos com nomes duplicados
+
+🏗️ Estrutura do Projeto
+📦 StockManager
+├── 📂 Model
+│   ├── Product.java          # Entidade Produto
+│   ├── Movements.java        # Entidade Movimentação
+│   ├── HandlingType.java     # Enum (INPUT/OUTPUT)
+│   └── 📂 DTO
+│       ├── ProductDTO.java    # DTO para Produto
+│       └── MovementDTO.java   # DTO para Movimentação
+├── 📂 Controller             # Endpoints REST
+├── 📂 Services               # Lógica de negócio
+├── 📂 Repositories           # Comunicação com banco
+├── 📂 Config                 # Configurações
+└── 📂 Exceptions             # Exceções customizadas
+🔧 Tecnologias Utilizadas
+Java 21
+
+Spring Boot 3.x
+
+JPA/Hibernate
+
+MySQL
+
+Flyway (migrações de banco)
+
+ModelMapper (conversão DTO/Entity)
+
+💡 Considerações sobre Atualização de Movimentações
+A atualização de movimentações foi temporariamente desabilitada devido à complexidade envolvida:
+
+Impacto no estoque: Alterar uma movimentação existente exigiria:
+
+Reverter o impacto original no estoque
+
+Aplicar o novo valor
+
+Tratar concorrência e transações atômicas
+
+Integridade histórica: Movimentações geralmente são registros imutáveis por natureza contábil
+
+Alternativas sugeridas:
+
+Criar nova movimentação de ajuste
+
+Manter como registro histórico e criar mecanismo de "estorno"
+
+Implementar sistema de "sessões" ou "lotes" que podem ser editados antes de fechamento
+
+▶️ Como Executar
+Configure o MySQL no application.properties
+
+Execute as migrações do Flyway
+
+Inicie a aplicação Spring Boot
+
+Acesse via http://localhost:8080
+
+📚 Melhorias Futuras
+Implementar autenticação/autorização
+
+Adicionar relatórios de estoque
+
+Criar endpoints para consultas complexas
+
+Implementar sistema de categorias de produtos
+
+Adicionar documentação Swagger/OpenAPI

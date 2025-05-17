@@ -17,7 +17,7 @@ public class MovementDTO implements Serializable {
 	private Date moveDate;
 
 		public MovementDTO(Long id, Long productId, HandlingType type, int amount, Date moveDate) {
-		super();
+
 		this.id = id;
 		this.productId = productId;
 		this.type = type;
