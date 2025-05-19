@@ -36,7 +36,9 @@ public class MovementsService {
 		Movements entity = mRepository.findById(id).orElseThrow(() ->new MovementNotFound("Movimentacão não encontrada!"));
 		return Optional.of(ModelMapperConfig.parseObjects(entity, MovementDTO.class))  ; 
 	}
-
+	public List<MovementDTO> findByType(String type){
+        return ModelMapperConfig.parseList(mRepository.findByType(type), MovementDTO.class);
+	}
 	@Transactional
 	public MovementDTO create(MovementDTO dto) {
 		Product product = pRepository.findById(dto.getProductId()).orElseThrow(() -> new ProdutNotFoudException("Produto não encontrado"));
@@ -60,4 +62,6 @@ public class MovementsService {
 	public void delete (Long id) {
 		mRepository.deleteById(id);
 	}
+
+
 }
