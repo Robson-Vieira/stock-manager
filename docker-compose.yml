@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  app:
+    build: .                 # Usa o Dockerfile para construir a imagem
+    depends_on:
+      - mysql                # Garante que o MySQL inicie primeiro
+    ports:
+      - "8080:8080"          # Expõe a porta da aplicação
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/stock_manager
+      SPRING_DATASOURCE_USERNAME: app_user
+      SPRING_DATASOURCE_PASSWORD: app_password
+
+  mysql:
+    image: mysql:8.0         # Imagem oficial do MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: stock_manager
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    ports:
+      - "3306:3306"          # Expõe a porta do MySQL (opcional para acesso externo)
+    volumes:
+      - mysql_data:/var/lib/mysql  # Persiste os dados do banco
+
+volumes:
+  mysql_data:                # Define um volume para persistência
