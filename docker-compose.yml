@@ -1,33 +1,24 @@
-version: '3.8'
 services:
-  app:
-    build: .                 # Usa o Dockerfile para construir a imagem
-    depends_on:
-      mysql:
-        condition: service_healthy               # Garante que o MySQL inicie primeiro
-    ports:
-      - "8080:8080"          # Expõe a porta da aplicação
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/stock_manager
-      SPRING_DATASOURCE_USERNAME: app_user
-      SPRING_DATASOURCE_PASSWORD: app_password
-
-  mysql:
+  db:
     image: mysql:8.0
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: stock_manager
-      MYSQL_USER: app_user
-      MYSQL_PASSWORD: app_password
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      MYSQL_ROOT_PASSWORD: 210502
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 210502
+      MYSQL_DATABASE: stockmanagerdb
     ports:
-      - "3306:3306"          # Expõe a porta do MySQL (opcional para acesso externo)
-    volumes:
-      - mysql_data:/var/lib/mysql  # Persiste os dados do banco
+      - "3307:3306"
 
-volumes:
-  mysql_data:                # Define um volume para persistência
+  stock-manager:
+    build: ./
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: 210502
+      DB_NAME: stockmanagerdb
+    ports:
+      - "8080:8080"

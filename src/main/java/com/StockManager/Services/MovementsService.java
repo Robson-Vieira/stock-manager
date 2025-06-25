@@ -7,6 +7,7 @@ import com.StockManager.Exceptions.InsufficientQuantityException;
 import com.StockManager.Exceptions.ProdutNotFoudException;
 import com.StockManager.Model.HandlingType;
 import com.StockManager.Model.Product;
+import com.StockManager.Repositories.MovementsRepository;
 import com.StockManager.Repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,14 +16,13 @@ import com.StockManager.Config.ModelMapperConfig;
 import com.StockManager.Exceptions.MovementNotFound;
 import com.StockManager.Model.Movements;
 import com.StockManager.Model.DTO.MovementDTO;
-import com.StockManager.Repositories.MovementsRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MovementsService {
 
 	@Autowired
-	private MovementsRepository mRepository; 
+	private MovementsRepository mRepository;
 
 	@Autowired
 	private ProductRepository pRepository;
