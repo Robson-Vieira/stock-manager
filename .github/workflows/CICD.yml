@@ -19,6 +19,6 @@ jobs:
 
     - uses: actions/setup-java@v4
       with:
-         distribuition: 'temurin'
+         distribution: 'temurin'
          java-version: '17'
          cache: maven
