@@ -23,11 +23,11 @@ jobs:
          java-version: '17'
          cache: maven
     - name: Build Application .jar
-      working-directory: ./stock-manager
+
       run: mvn clean package
 
     - name: Docker Compose Build
-      working-directory: .
+
       run: docker compose build
 
     - name: Push to Docker Hub Container Registry
