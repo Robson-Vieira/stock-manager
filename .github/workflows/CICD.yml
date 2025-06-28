@@ -22,3 +22,18 @@ jobs:
          distribution: 'temurin'
          java-version: '17'
          cache: maven
+    - name: Build Application .jar
+      working-directory: ./stock-manager
+      run: mvn clean package
+
+    - name: Docker Compose Build
+      working-directory: ./stock-manager
+      run: docker compose build
+
+    - name: Push to Docker Hub Container Registry
+      run: |
+        docker tag stock-manager-stock-manager:latest ${{ secrets.DOCKER_USERNAME }}/stock-manager:${{ github.run_id }}
+        
+        docker push stock-manager-stock-manager:latest
+        
+        docker push ${{ secrets.DOCKER_USERNAME }}/stock-manager:${{ github.run_id }}
