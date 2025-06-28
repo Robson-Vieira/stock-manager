@@ -37,3 +37,11 @@ jobs:
         docker push stock-manager-stock-manager:latest
         
         docker push ${{ secrets.DOCKER_USERNAME }}/stock-manager:${{ github.run_id }}
+
+    - name: Start DB with Docker Compose
+      run: docker compose up -d
+
+    - name: Wait for DB
+      run: |
+        echo "Esperando o banco iniciar..."
+        sleep 15
