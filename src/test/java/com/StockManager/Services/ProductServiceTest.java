@@ -88,7 +88,7 @@ public class ProductServiceTest {
 
 
     @Test
-    void findById_WhenProductNotFound_SholdException(){
+    void findById_WhenProductNotFound_shouldException(){
         Long id = 82L;
 
         when(repository.findById(id)).thenReturn(Optional.empty());
@@ -100,7 +100,7 @@ public class ProductServiceTest {
 
 
     @Test
-    void DeleteById(){
+    void deleteByIdProduct_whenProductExists_shouldReturnDelete(){
         Long id = 5L;
 
         service.delete(id);
@@ -110,7 +110,7 @@ public class ProductServiceTest {
 
 
     @Test
-    void deleteProductById_WhenProductNotFound_SholdException() {
+    void deleteProductById_WhenProductNotFound_shouldException() {
         Long id = 34L;
 
         doThrow( new EntityNotFoundException("O produto não existe pra ser deletado! ")).when(repository).deleteById(id);

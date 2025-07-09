@@ -1,6 +1,7 @@
 package com.StockManager.Services;
 
 import com.StockManager.Exceptions.InsufficientQuantityException;
+import com.StockManager.Exceptions.MovementNotFound;
 import com.StockManager.Exceptions.ProdutNotFoudException;
 import com.StockManager.Model.DTO.MovementDTO;
 import com.StockManager.Model.DTO.ProductDTO;
@@ -83,7 +84,7 @@ public class MovementsServiceTest {
     }
 
     @Test
-    void findById() {
+    void findByIdMovements_whenMovementsExists_shouldReturnMovements() {
 
         Movements movements = new Movements(5L, 5L, HandlingType.INPUT, 32 );
         when(mRepository.findById(5L)).thenReturn(Optional.of(movements));
@@ -95,11 +96,31 @@ public class MovementsServiceTest {
         assertEquals(5L, result.getId());
         assertEquals(HandlingType.INPUT, result.getType());
         assertEquals(32, result.getAmount());
-    }@Test
-    void update() {
+    }
 
-    }@Test
-    void delete() {
+    @Test
+    void findByIdMovements_whenMovementsNotFound_shouldThrowMovementsNotFound(){
+        when(mRepository.findById(3L)).thenReturn(Optional.empty());
+
+        assertThrows(MovementNotFound.class, () -> service.findById(3L));
+    }
+
+    @Test
+    void deleteByIdMovements_whenMovementsExists_shouldReturnDelete() {
+        service.delete(5L);
+
+        verify(mRepository).deleteById(5L);
+
+    }
+
+    @Test
+    void deleteByIdMovements_whenMovementsNotFound_shouldThrowException() {
+        Long id = 66L;
+
+        doThrow(new MovementNotFound("Movimentação não encontrada!!")).when(mRepository).deleteById(id);
+
+        assertThrows(MovementNotFound.class , () -> service.delete(id));
+        verify(mRepository).deleteById(id);
 
     }
 
