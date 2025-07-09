@@ -13,8 +13,12 @@ import com.StockManager.Repositories.ProductRepository;
 @Service
 public class ProductService {
 
-	@Autowired
 	private ProductRepository pRepository;
+
+	@Autowired
+	ProductService(ProductRepository repository){
+		this.pRepository= repository;
+	}
 
 	public ProductDTO findById(Long id) {
 		Product entity = pRepository.findById(id).orElseThrow(() -> new ProdutNotFoudException("Produto não encontrado!"));

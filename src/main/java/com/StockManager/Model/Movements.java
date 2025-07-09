@@ -45,13 +45,12 @@ public class Movements implements Serializable {
 	public Movements() {
 	}
 
-	public Movements(Long id, Long productId, HandlingType type, int amount, Date moveDate) {
+	public Movements(Long id, Long productId, HandlingType type, int amount) {
 
 		this.id = id;
 		this.productId = productId;
 		this.type = type;
 		this.amount = amount;
-		this.moveDate = moveDate;
 	}
 
 	public Long getId() {

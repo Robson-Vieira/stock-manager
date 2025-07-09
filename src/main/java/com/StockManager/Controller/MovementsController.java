@@ -26,7 +26,7 @@ public class MovementsController {
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<MovementDTO> findMovement(@RequestParam Long id) {
+	public MovementDTO findMovement(@RequestParam Long id) {
 		return mService.findById(id);
 	}
 

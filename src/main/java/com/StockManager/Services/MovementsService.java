@@ -26,15 +26,20 @@ public class MovementsService {
 
 	@Autowired
 	private ProductRepository pRepository;
-	
+
+	public MovementsService(MovementsRepository mrepository, ProductRepository pRepository){
+		this.mRepository = mrepository;
+		this.pRepository = pRepository;
+	}
+
 	
 	public List<MovementDTO> findAll() {
 		return ModelMapperConfig.parseList(mRepository.findAll(), MovementDTO.class) ;
 	}
 
-	public Optional<MovementDTO> findById(Long id) {
+	public MovementDTO findById(Long id) {
 		Movements entity = mRepository.findById(id).orElseThrow(() ->new MovementNotFound("Movimentacão não encontrada!"));
-		return Optional.of(ModelMapperConfig.parseObjects(entity, MovementDTO.class))  ; 
+		return ModelMapperConfig.parseObjects(entity, MovementDTO.class)  ;
 	}
 	public List<MovementDTO> findByType(String type){
         return ModelMapperConfig.parseList(mRepository.findByType(type), MovementDTO.class);

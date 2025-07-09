@@ -15,7 +15,7 @@ public class ProductDTO implements Serializable {
 	public ProductDTO() {
 	}
 
-	ProductDTO(Long id, String name, String description, int amount, Long heritage) {
+	public ProductDTO(Long id, String name, String description, int amount, Long heritage) {
 
 		this.id = id;
 		this.name = name;
